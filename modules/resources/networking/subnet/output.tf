@@ -1,30 +1,20 @@
 
 output "subnetID" {
-  value = {
-    for k,v in azurerm_subnet.subnet: k => v.id
-  }
+  value = azurerm_subnet.subnet.id
 }
 
 output "subnetName" {
-  value = {
-    for k,v in azurerm_subnet.subnet: k => v.name
-  }
+  value = azurerm_subnet.subnet.name
 }
 
 output "subnetResourceGroupName" {
-  value = {
-    for k,v in azurerm_subnet.subnet: k => v.resource_group_name
-  } 
+  value = azurerm_subnet.subnet.resource_group_name
 }
 
 output "subnetVirtualNetworkName" {
-  value = {
-    for k,v in azurerm_subnet.subnet: k => v.virtual_network_name
-  } 
+  value = azurerm_subnet.subnet.virtual_network_name
 }
 
 output "subnetAddressPrefixes" {
-  value = {
-    for k,v in azurerm_subnet.subnet: k => v.address_prefixes
-  } 
+  value = azurerm_subnet.subnet.address_prefixes
 }
