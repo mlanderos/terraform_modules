@@ -1,3 +1,7 @@
+output "virtualNetworkID" {
+  value = azurerm_virtual_network.virtual_network.id
+}
+
 output "virtualNetworkName" {
   value = azurerm_virtual_network.virtual_network.name
 }
