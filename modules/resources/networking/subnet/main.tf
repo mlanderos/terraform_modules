@@ -1,24 +1,21 @@
 
 resource "azurerm_subnet" "subnet" {
-  for_each = {
-    for s in var.subnet: s.name => s
-  }
-  name = each.value["name"]
-  resource_group_name = each.value["resource_group_name"]
-  virtual_network_name = each.value["virtual_network_name"]
-  address_prefixes = each.value["address_prefixes"]
-  private_endpoint_network_policies_enabled  = each.value["private_endpoint_network_policies_enabled"]
-  private_link_service_network_policies_enabled = each.value["private_link_service_network_policies_enabled"]
-  service_endpoints = can(each.value["service_endpoints"]) ? null : each.value["service_endpoints"]
-  service_endpoint_policy_ids = can(each.value["service_endpoint_policy_ids"]) ? each.value["service_endpoint_policy_ids"] : null 
+  name                                          = var.subnetName
+  resource_group_name                           = var.subnetResourceGroupName
+  virtual_network_name                          = var.subnetVirtualNetworkName
+  address_prefixes                              = var.subnetAddressPrefixes
+  private_endpoint_network_policies_enabled     = var.subnetPrivateEndpointNetworkPoliciesEnabled
+  private_link_service_network_policies_enabled = var.subnetPrivateLinkServiceNetworkPoliciesEnabled
+  service_endpoints                             = var.subnetServiceEndpoints
+  service_endpoint_policy_ids                   = var.subnetServiceEndpointPolicyIDs
   
     dynamic "delegation" {
-    for_each = each.value["delegation"] != null ? [1] : []
+    for_each = var.subnetDelegation_Name != "" ? [1] : []
     content {
       name = "delegation"
       service_delegation {
-        name    = each.value["delegation"].name
-        actions = each.value["delegation"].actions
+        name    = var.subnetDelegation_Name
+        actions = var.subnetDelegation_Actions
       }
     }
   } 
