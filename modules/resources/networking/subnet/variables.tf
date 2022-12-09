@@ -1,22 +1,50 @@
+variable "subnetName" {
+  type = string
+}
 
-variable "virtualNetworkResourceGroupName" {
+variable "subnetResourceGroupName" {
   type = string
   #TODO: length 3-63
 }
 
-variable "subnet" {
-  type = list(object({
-    name = string
-    resource_group_name = string
-    virtual_network_name = string
-    address_prefixes = list(string)
-    private_endpoint_network_policies_enabled  = bool
-    private_link_service_network_policies_enabled = bool
-    service_endpoints = optional(list(string))
-    service_endpoint_policy_ids = optional(list(string))
-    delegation = optional(object({
-      name = string
-      actions = list(string)
-    }))
-  }))
+variable "subnetVirtualNetworkName" {
+  type = string
+}
+
+variable "subnetAddressPrefixes" {
+  type = list(string)
+}
+
+variable "subnetPrivateEndpointNetworkPoliciesEnabled" {
+  type = bool
+}
+
+variable "subnetPrivateLinkServiceNetworkPoliciesEnabled" {
+  type = bool
+}
+
+variable "subnetServiceEndpoints" {
+  type = set(string)
+  
+  nullable = true
+  default = []
+}
+
+variable "subnetServiceEndpointPolicyIDs" {
+  type = set(string)
+  
+  nullable = true
+  #default = []
+}
+
+variable "subnetDelegation_Name" {
+  type = string
+  nullable = true
+  default = ""
+}
+
+variable "subnetDelegation_Actions" {
+  type = list(string)
+  nullable = true
+  default = []
 }
